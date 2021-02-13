@@ -31,7 +31,9 @@
           <text class="text-grey">{{ item.name }} - {{ item.account }}</text>
         </view>
         <view class="action">
-          <view class="cu-tag round bg-black light">段位 {{ item.rank }}</view>
+          <view class="cu-tag round bg-black light" @click="onAccountCopy(item)"
+            >段位 {{ item.rank }}</view
+          >
         </view>
       </view>
     </view>
@@ -44,11 +46,19 @@ import { Component, Vue, Watch } from "vue-property-decorator";
 import { State, Action, Getter, Mutation } from "vuex-class";
 
 // 帮助函数
-import { users } from "@/utils/mock";
+import { $toast } from "@/utils/message";
+import { User, users } from "@/utils/mock";
 
 @Component({})
 export default class UserIndex extends Vue {
   private users = users;
+
+  onAccountCopy(item: User) {
+    uni.setClipboardData({
+      data: item.account,
+      success: () => $toast("复制成功"),
+    });
+  }
 }
 </script>
 
