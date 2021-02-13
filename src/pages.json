@@ -1,0 +1,15 @@
+{
+  "pages": [{
+    "path": "packages/user/index/index",
+    "style": {
+      "navigationBarTitleText": "电气鼠Rank"
+    }
+  }
+],
+  "globalStyle": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "uni-app",
+    "navigationBarBackgroundColor": "#ffffff",
+    "backgroundColor": "#ffffff"
+  }
+}
