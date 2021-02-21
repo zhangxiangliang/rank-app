@@ -25,14 +25,16 @@
     </view> -->
 
     <view class="cu-list menu">
-      <view v-for="item in users" :key="item.account" class="cu-item">
+      <view v-for="item in stars" :key="item.douyin_id" class="cu-item">
         <view class="content">
           <text class="cuIcon-title text-black"></text>
-          <text class="text-grey">{{ item.name }} - {{ item.account }}</text>
+          <text class="text-grey">{{ item.douyin_name }}</text>
         </view>
         <view class="action">
-          <view class="cu-tag round bg-black light" @click="onAccountCopy(item)"
-            >段位 {{ item.rank }}</view
+          <view
+            class="cu-tag round bg-black light"
+            @click="onAccountCopy(item)"
+            >{{ item.douyin_id }}</view
           >
         </view>
       </view>
@@ -45,17 +47,27 @@
 import { Component, Vue, Watch } from "vue-property-decorator";
 import { State, Action, Getter, Mutation } from "vuex-class";
 
+// 模型
+import { Star } from "@/store/star";
+
 // 帮助函数
 import { $toast } from "@/utils/message";
-import { User, users } from "@/utils/mock";
 
 @Component({})
 export default class UserIndex extends Vue {
-  private users = users;
+  // 平台模型
+  @State((state) => state.star.lists) private stars!: Star[];
+  @State((state) => state.star.loading) private loading!: boolean;
+  @Action("star/refresh") private refresh!: Function;
 
-  onAccountCopy(item: User) {
+  // 页面加载
+  private onLoad(option: any) {
+    this.refresh();
+  }
+
+  onAccountCopy(item: Star) {
     uni.setClipboardData({
-      data: item.account,
+      data: item.douyin_id,
       success: () => $toast("复制成功"),
     });
   }

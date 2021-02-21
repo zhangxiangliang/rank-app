@@ -176,12 +176,6 @@ export const users: User[] = [
     rank: "T2",
   },
   {
-    name: '糊涂猫',
-    avatar: '',
-    account: 'OvO1988',
-    rank: "T2",
-  },
-  {
     name: '沙雕的悦悦',
     avatar: '',
     account: '6134328',
