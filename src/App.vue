@@ -10,10 +10,10 @@ Vue.prototype.$store = store;
 
 export default Vue.extend({
   mpType: "app",
-  onLaunch() {},
-  onShow() {
+  onLaunch() {
     store.dispatch("user/login");
   },
+  onShow() {},
   onHide() {},
 });
 </script>

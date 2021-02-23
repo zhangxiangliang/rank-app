@@ -130,15 +130,13 @@ export function http<T>({
 
     // 失败回调函数
     const requestFailCallback = (res: UniApp.GeneralCallbackResult) => {
-      if (res.errMsg == "request:fail") {
-        uni.showToast({
+      res.errMsg !== "request:fail"
+        ? reject(new Error('网络请求失败'))
+        : uni.showToast({
           title: "网络连接失败,请检查设备的网络通信是否正常",
           icon: "none",
           duration: 4000
         });
-      }
-
-      reject(res);
     }
 
     // 完成回调函数

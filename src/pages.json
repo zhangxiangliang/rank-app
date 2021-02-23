@@ -9,7 +9,6 @@
     "path": "packages/user/index/index",
     "style": {
       "navigationBarTitleText": "电气鼠Rank",
-      "enablePullDownRefresh": true,
       "navigationStyle": "custom"
     }
   }],

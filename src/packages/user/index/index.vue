@@ -9,8 +9,7 @@
         <open-data type="userNickName"></open-data>
       </view>
 
-      <image mode="scaleToFill" class="gif-wave" src="@/static/avatar/wave.gif">
-      </image>
+      <image mode="scaleToFill" class="gif-wave" :src="CONFIG_WAVE"> </image>
     </view>
 
     <view class="cu-list menu margin-bottom-xl shadow-lg">
@@ -25,7 +24,7 @@
         <view class="content">
           <text class="cuIcon-writefill text-cyan"></text>
           <text class="text-grey">联系作者</text>
-          <button class="contact" open-type="contact"></button>
+          <button class="contact" open-type="contact">联系作者</button>
         </view>
       </view>
 
@@ -63,10 +62,11 @@ import { State, Action, Getter, Mutation } from "vuex-class";
 import { User } from "@/store/user";
 
 // 帮助函数
-import { CONFIG_APP_NAME, CONFIG_QRCODE } from "@/config";
+import { CONFIG_APP_NAME, CONFIG_QRCODE, CONFIG_WAVE } from "@/config";
 
 @Component({})
 export default class UserIndex extends Vue {
+  public CONFIG_WAVE = CONFIG_WAVE;
   public CONFIG_QRCODE = CONFIG_QRCODE;
   public CONFIG_APP_NAME = CONFIG_APP_NAME;
 

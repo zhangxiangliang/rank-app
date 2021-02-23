@@ -9,4 +9,5 @@ export const CONFIG_API_URL = `${CONFIG_BASE_URL}/api/${CONFIG_API_VERSION}`;
 
 // CDN配置
 export const CONFIG_CDN_URL = 'http://rank-cdn.pushme.top';
+export const CONFIG_WAVE = `${CONFIG_CDN_URL}/wave.gif`;
 export const CONFIG_QRCODE = `${CONFIG_CDN_URL}/qrcode.png`;
