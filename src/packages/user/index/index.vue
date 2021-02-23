@@ -1,43 +1,18 @@
 <template>
   <view>
-    <view class="cu-bar bg-white solid-bottom margin-top">
-      <view class="action">
-        <text class="cuIcon-title text-black"></text> 电气鼠
+    <view class="navbar">
+      <view class="avatar">
+        <open-data type="userAvatarUrl"></open-data>
       </view>
-    </view>
+      <view class="text-lg">
+        <open-data type="userNickName"></open-data>
+      </view>
+      <view class="margin-top-sm">
+        <text>陪伴您每一个夜晚</text>
+      </view>
 
-    <!-- <view class="cu-list menu-avatar">
-      <view v-for="item in users" :key="item.account" class="cu-item">
-        <image class="cu-avatar round lg" :src="item.avatar"></image>
-        <view class="content">
-          <view class="text-grey">{{ item.name }}</view>
-          <view class="text-gray text-sm flex">
-            <view class="text-cut">
-              <text class="cuIcon-infofill text-red margin-right-xs"></text>
-              {{ item.account }}
-            </view>
-          </view>
-        </view>
-        <view class="action" style="width: auto">
-          <view class="cu-tag round bg-black">段位 {{ item.rank }}</view>
-        </view>
-      </view>
-    </view> -->
-
-    <view class="cu-list menu">
-      <view v-for="item in stars" :key="item.id" class="cu-item">
-        <view class="content">
-          <text class="cuIcon-title text-black"></text>
-          <text class="text-grey">{{ item.douyin_name }}</text>
-        </view>
-        <view class="action">
-          <view
-            class="cu-tag round bg-black light"
-            @click="onAccountCopy(item)"
-            >{{ item.douyin_id }}</view
-          >
-        </view>
-      </view>
+      <image mode="scaleToFill" class="gif-wave" src="@/static/avatar/wave.gif">
+      </image>
     </view>
   </view>
 </template>
@@ -48,35 +23,14 @@ import { Component, Vue, Watch } from "vue-property-decorator";
 import { State, Action, Getter, Mutation } from "vuex-class";
 
 // 模型
-import { Star } from "@/store/star";
+import { User } from "@/store/user";
 
 // 帮助函数
-import { $toast } from "@/utils/message";
+import { CONFIG_APP_NAME } from "@/config";
 
 @Component({})
 export default class UserIndex extends Vue {
-  // 平台模型
-  @State((state) => state.star.lists) private stars!: Star[];
-  @State((state) => state.star.loading) private loading!: boolean;
-  @Action("star/refresh") private refresh!: Function;
-
-  // 页面加载
-  onLoad(option: any) {
-    this.refresh();
-  }
-
-  // 下拉刷新
-  onPullDownRefresh() {
-    this.refresh();
-  }
-
-  // 复制抖音号
-  onAccountCopy(item: Star) {
-    uni.setClipboardData({
-      data: item.douyin_id,
-      success: () => $toast("复制成功"),
-    });
-  }
+  public CONFIG_APP_NAME = CONFIG_APP_NAME;
 }
 </script>
 

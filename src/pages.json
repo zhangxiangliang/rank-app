@@ -1,16 +1,42 @@
 {
   "pages": [{
-    "path": "packages/user/index/index",
+    "path": "packages/rank/index/index",
     "style": {
       "navigationBarTitleText": "电气鼠Rank",
       "enablePullDownRefresh": true
     }
-  }
-],
+  },{
+    "path": "packages/user/index/index",
+    "style": {
+      "navigationBarTitleText": "电气鼠Rank",
+      "enablePullDownRefresh": true,
+      "navigationStyle": "custom"
+    }
+  }],
   "globalStyle": {
     "navigationBarTextStyle": "black",
     "navigationBarTitleText": "uni-app",
     "navigationBarBackgroundColor": "#ffffff",
     "backgroundColor": "#f1f1f1"
+  },
+  "tabBar": {
+    "color": "#BBBABA",
+    "selectedColor": "#000000",
+    "borderStyle": "black",
+    "backgroundColor": "#FFFFFF",
+    "list": [
+      {
+        "pagePath": "packages/rank/index/index",
+        "text": "排行",
+        "iconPath": "static/tabbar/rank.png",
+        "selectedIconPath": "static/tabbar/rank-active.png"
+      },
+      {
+        "pagePath": "packages/user/index/index",
+        "text": "我的",
+        "iconPath": "static/tabbar/user.png",
+        "selectedIconPath": "static/tabbar/user-active.png"
+      }
+    ]
   }
 }

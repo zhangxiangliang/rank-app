@@ -1,4 +1,5 @@
 // 应用配置
+export const CONFIG_APP_NAME = "电气鼠 Rank";
 export const CONFIG_APP_ENV = process.env.NODE_ENV;
 export const CONFIG_BASE_URL = CONFIG_APP_ENV === "development" ? 'http://rank.test' : 'https://rank.pushme.top';
 
