@@ -2,7 +2,8 @@
   "pages": [{
     "path": "packages/user/index/index",
     "style": {
-      "navigationBarTitleText": "电气鼠Rank"
+      "navigationBarTitleText": "电气鼠Rank",
+      "enablePullDownRefresh": true
     }
   }
 ],
@@ -10,6 +11,6 @@
     "navigationBarTextStyle": "black",
     "navigationBarTitleText": "uni-app",
     "navigationBarBackgroundColor": "#ffffff",
-    "backgroundColor": "#ffffff"
+    "backgroundColor": "#f1f1f1"
   }
 }

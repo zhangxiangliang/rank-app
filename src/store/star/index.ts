@@ -79,7 +79,10 @@ export const star: Module<StarState, RootStore> = {
       return $get<Response<Star[]>>({ url: '/star', data: { page: 1 } })
         .then(res => commit('fetch', res))
         .catch(err => $toast(err.message))
-        .finally(() => commit('loading', false));
+        .finally(() => {
+          uni.stopPullDownRefresh();
+          commit('loading', false)
+        });
     },
 
     /**

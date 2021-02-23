@@ -25,7 +25,7 @@
     </view> -->
 
     <view class="cu-list menu">
-      <view v-for="item in stars" :key="item.douyin_id" class="cu-item">
+      <view v-for="item in stars" :key="item.id" class="cu-item">
         <view class="content">
           <text class="cuIcon-title text-black"></text>
           <text class="text-grey">{{ item.douyin_name }}</text>
@@ -61,10 +61,16 @@ export default class UserIndex extends Vue {
   @Action("star/refresh") private refresh!: Function;
 
   // 页面加载
-  private onLoad(option: any) {
+  onLoad(option: any) {
     this.refresh();
   }
 
+  // 下拉刷新
+  onPullDownRefresh() {
+    this.refresh();
+  }
+
+  // 复制抖音号
   onAccountCopy(item: Star) {
     uni.setClipboardData({
       data: item.douyin_id,
