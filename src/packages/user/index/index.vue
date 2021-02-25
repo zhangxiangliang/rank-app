@@ -70,6 +70,15 @@ export default class UserIndex extends Vue {
   public CONFIG_QRCODE = CONFIG_QRCODE;
   public CONFIG_APP_NAME = CONFIG_APP_NAME;
 
+  // 分享页面
+  onShareAppMessage() {
+    return {
+      title: "电气鼠喊你回家啦~",
+      path: "/packages/rank/index/index",
+    };
+  }
+
+  // 赞赏码
   onPriviewQrcode() {
     uni.previewImage({
       urls: [CONFIG_QRCODE],

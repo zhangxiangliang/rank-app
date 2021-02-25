@@ -53,6 +53,26 @@ export default class UserIndex extends Vue {
   // 页面加载
   onLoad(option: any) {
     this.refresh();
+
+    uni.share({
+      provider: "weixin",
+      scene: "WXSceneSession",
+      type: 5,
+      title: "~",
+      miniProgram: {
+        id: "wxaba216fea2c11a58",
+        path: "packages/rank/index/index",
+        type: 0,
+      },
+    });
+  }
+
+  // 分享页面
+  onShareAppMessage() {
+    return {
+      title: "电气鼠喊你回家啦~",
+      path: "/packages/rank/index/index",
+    };
   }
 
   // 下拉刷新
