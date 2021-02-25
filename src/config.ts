@@ -11,3 +11,8 @@ export const CONFIG_API_URL = `${CONFIG_BASE_URL}/api/${CONFIG_API_VERSION}`;
 export const CONFIG_CDN_URL = 'http://rank-cdn.pushme.top';
 export const CONFIG_WAVE = `${CONFIG_CDN_URL}/wave.gif`;
 export const CONFIG_QRCODE = `${CONFIG_CDN_URL}/qrcode.png`;
+
+// 页面配置
+export const PAGE_LOG_INDEX = '/packages/log/index/index';
+export const PAGE_RANK_INDEX = '/packages/rank/index/index';
+export const PAGE_USER_INDEX = '/packages/user/index/index';

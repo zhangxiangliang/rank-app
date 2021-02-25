@@ -42,6 +42,7 @@ import { Star } from "@/store/star";
 
 // 帮助函数
 import { $toast } from "@/utils/message";
+import { PAGE_RANK_INDEX } from "@/config";
 
 @Component({})
 export default class UserIndex extends Vue {
@@ -53,25 +54,13 @@ export default class UserIndex extends Vue {
   // 页面加载
   onLoad(option: any) {
     this.refresh();
-
-    uni.share({
-      provider: "weixin",
-      scene: "WXSceneSession",
-      type: 5,
-      title: "~",
-      miniProgram: {
-        id: "wxaba216fea2c11a58",
-        path: "packages/rank/index/index",
-        type: 0,
-      },
-    });
   }
 
   // 分享页面
   onShareAppMessage() {
     return {
       title: "电气鼠喊你回家啦~",
-      path: "/packages/rank/index/index",
+      path: PAGE_RANK_INDEX,
     };
   }
 

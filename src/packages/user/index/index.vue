@@ -28,27 +28,12 @@
         </view>
       </view>
 
-      <!-- <view class="cu-item arrow">
-        <navigator
-          class="content"
-          url="/pages/about/log/log"
-          hover-class="none"
-        >
+      <view class="cu-item arrow">
+        <navigator class="content" :url="PAGE_LOG_INDEX" hover-class="none">
           <text class="cuIcon-formfill text-green"></text>
           <text class="text-grey">更新日志</text>
         </navigator>
-      </view> -->
-
-      <!-- <view class="cu-item arrow">
-        <navigator
-          class="content"
-          url="/pages/about/about/about"
-          hover-class="none"
-        >
-          <text class="cuIcon-infofill text-orange"></text>
-          <text class="text-grey">关于我们</text>
-        </navigator>
-      </view> -->
+      </view>
     </view>
   </view>
 </template>
@@ -62,19 +47,26 @@ import { State, Action, Getter, Mutation } from "vuex-class";
 import { User } from "@/store/user";
 
 // 帮助函数
-import { CONFIG_APP_NAME, CONFIG_QRCODE, CONFIG_WAVE } from "@/config";
+import {
+  CONFIG_APP_NAME,
+  CONFIG_QRCODE,
+  CONFIG_WAVE,
+  PAGE_LOG_INDEX,
+  PAGE_USER_INDEX,
+} from "@/config";
 
 @Component({})
 export default class UserIndex extends Vue {
   public CONFIG_WAVE = CONFIG_WAVE;
   public CONFIG_QRCODE = CONFIG_QRCODE;
+  public PAGE_LOG_INDEX = PAGE_LOG_INDEX;
   public CONFIG_APP_NAME = CONFIG_APP_NAME;
 
   // 分享页面
   onShareAppMessage() {
     return {
       title: "电气鼠喊你回家啦~",
-      path: "/packages/rank/index/index",
+      path: PAGE_USER_INDEX,
     };
   }
 

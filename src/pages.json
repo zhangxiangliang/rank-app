@@ -1,17 +1,4 @@
 {
-  "pages": [{
-    "path": "packages/rank/index/index",
-    "style": {
-      "navigationBarTitleText": "电气鼠Rank",
-      "enablePullDownRefresh": true
-    }
-  },{
-    "path": "packages/user/index/index",
-    "style": {
-      "navigationBarTitleText": "电气鼠Rank",
-      "navigationStyle": "custom"
-    }
-  }],
   "globalStyle": {
     "navigationBarTextStyle": "black",
     "navigationBarTitleText": "uni-app",
@@ -37,5 +24,31 @@
         "selectedIconPath": "static/tabbar/user-active.png"
       }
     ]
-  }
+  },
+  "pages": [{
+    "path": "packages/rank/index/index",
+    "style": {
+      "navigationBarTitleText": "电气鼠Rank",
+      "enablePullDownRefresh": true
+    }
+  },{
+    "path": "packages/user/index/index",
+    "style": {
+      "navigationBarTitleText": "电气鼠Rank",
+      "navigationStyle": "custom"
+    }
+  }],
+  "subPackages": [
+    {
+      "root": "packages/log",
+      "pages": [
+        {
+          "path": "index/index",
+          "style": {
+            "navigationBarTitleText": "更新日志"
+          }
+        }
+      ]
+    }
+  ]
 }
