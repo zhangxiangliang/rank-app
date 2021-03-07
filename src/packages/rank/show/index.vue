@@ -22,21 +22,42 @@
     <view class="cu-card case no-card" v-for="item in videos" :key="item.id">
       <view class="cu-item shadow padding-bottom">
         <view class="image">
-          <!-- <image :src="item.douyin_dynamic" mode="widthFix"></image> -->
+          <image
+            :src="item.douyin_dynamic"
+            mode="widthFix"
+            @click="onPlayVideo(item)"
+          ></image>
 
-          <video
-            :src="item.douyin_link"
-            :poster="item.douyin_cover"
-            objectFit="contain"
-            style="width: 100%"
-            enable-danmu
-            danmu-btn
-            controls
-          ></video>
           <view class="cu-bar bg-shadeBottom">
             <text class="text-cut">{{ item.douyin_description }}</text>
           </view>
         </view>
+      </view>
+    </view>
+
+    <video
+      v-if="video.id !== 0"
+      :id="`video-${video.id}`"
+      :src="video.douyin_link"
+      :poster="video.douyin_cover"
+      objectFit="contain"
+      style="width: 100%; height: 0"
+      controls
+      @fullscreenchange="onFullScreenChange"
+    ></video>
+
+    <view
+      v-if="videos.length === 0 && videosHasNext === false"
+      class="text-center margin-top"
+    >
+      <view class="padding-lr bg-white padding-bottom">
+        <view class="solid-bottom padding">
+          <text class="text-black text-bold text-xl">提示</text>
+        </view>
+        <view class="padding">对不起，未查找到相关视频</view>
+        <button class="cu-btn block bg-black lg" @click="onNavigateBack">
+          返回上级
+        </button>
       </view>
     </view>
   </view>
@@ -48,7 +69,7 @@ import { Component, Vue, Watch } from "vue-property-decorator";
 import { State, Action, Getter, Mutation } from "vuex-class";
 
 // 模型
-import { Video } from "@/store/video";
+import { InitVideo, Video } from "@/store/video";
 import { InitStar, Star } from "@/store/star";
 
 // 帮助函数
@@ -66,6 +87,7 @@ export default class UserShow extends Vue {
   // 视频模型
   @State((state) => state.video.lists) private videos!: Video[];
   @State((state) => state.video.loading) private videosLoading!: boolean;
+  @State((state) => state.video.has_next) private videosHasNext!: boolean;
   @Action("video/init") private initVideos!: Function;
   @Action("video/refresh") private refreshVideos!: Function;
 
@@ -74,11 +96,32 @@ export default class UserShow extends Vue {
     ...InitStar,
   };
 
+  private videoContext: any = null;
+  private video: Video = { ...InitVideo };
+
   // 页面加载
   onLoad(option: any) {
     this.initVideos();
     this.state.id = option.id;
     this.show({ id: option.id });
+  }
+
+  // 页面隐藏
+  onHide() {
+    if (this.videoContext) {
+      this.videoContext.stop();
+      this.videoContext.exitFullScreen();
+      this.video = { ...InitVideo };
+    }
+  }
+
+  // 页面显示
+  onShow() {
+    if (this.videoContext) {
+      this.videoContext.stop();
+      this.videoContext.exitFullScreen();
+      this.video = { ...InitVideo };
+    }
   }
 
   // 分享页面
@@ -91,6 +134,34 @@ export default class UserShow extends Vue {
 
   // 下拉刷新
   onPullDownRefresh() {}
+
+  // 视频播放
+  onPlayVideo(item: Video) {
+    this.video = { ...item };
+
+    uni.showLoading({ title: "加载中", mask: true });
+
+    setTimeout(() => {
+      uni.hideLoading();
+      this.videoContext = uni.createVideoContext(`video-${item.id}`, this);
+      this.videoContext.requestFullScreen({ direction: 0 });
+      this.videoContext.play();
+    }, 1000);
+  }
+
+  // 退出全屏
+  onFullScreenChange(event: any) {
+    if (!event.detail.fullScreen) {
+      this.videoContext.stop();
+      this.videoContext.exitFullScreen();
+      this.video = { ...InitVideo };
+    }
+  }
+
+  // 返回上级
+  onNavigateBack() {
+    uni.navigateBack({});
+  }
 
   @Watch("stars")
   private onStarsChanged() {

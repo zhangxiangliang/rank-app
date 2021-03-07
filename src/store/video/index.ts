@@ -26,7 +26,7 @@ export interface Video {
   liked: number;
 };
 
-export const InitStar: Video = {
+export const InitVideo: Video = {
   id: 0,
   star_id: 0,
 
@@ -64,7 +64,6 @@ export const video: Module<VideoState, RootStore> = {
       state.star_id = payload;
       state.page = 1;
       state.lists = [];
-      state.loading = false;
       state.has_next = true;
     },
 
@@ -97,7 +96,7 @@ export const video: Module<VideoState, RootStore> = {
     /**
      * 视频刷新
      */
-    refresh({ commit }, { star_id }) {
+    refresh({ commit, state }, { star_id }) {
       commit('loading', true);
       commit('init', star_id);
 
