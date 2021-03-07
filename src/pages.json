@@ -12,13 +12,13 @@
     "backgroundColor": "#FFFFFF",
     "list": [
       {
-        "pagePath": "packages/rank/index/index",
+        "pagePath": "packages/page/rank/index",
         "text": "排行",
         "iconPath": "static/tabbar/rank.png",
         "selectedIconPath": "static/tabbar/rank-active.png"
       },
       {
-        "pagePath": "packages/user/index/index",
+        "pagePath": "packages/page/user/index",
         "text": "我的",
         "iconPath": "static/tabbar/user.png",
         "selectedIconPath": "static/tabbar/user-active.png"
@@ -26,13 +26,13 @@
     ]
   },
   "pages": [{
-    "path": "packages/rank/index/index",
+    "path": "packages/page/rank/index",
     "style": {
       "navigationBarTitleText": "电气鼠Rank",
       "enablePullDownRefresh": true
     }
   },{
-    "path": "packages/user/index/index",
+    "path": "packages/page/user/index",
     "style": {
       "navigationBarTitleText": "电气鼠Rank",
       "navigationStyle": "custom"
@@ -40,12 +40,25 @@
   }],
   "subPackages": [
     {
+      "root": "packages/rank",
+      "pages": [
+        {
+          "path": "show/index",
+          "style": {
+            "navigationBarTitleText": "",
+            "enablePullDownRefresh": true
+          }
+        }
+      ]
+    },
+    {
       "root": "packages/log",
       "pages": [
         {
           "path": "index/index",
           "style": {
-            "navigationBarTitleText": "更新日志"
+            "navigationBarTitleText": "更新日志",
+            "enablePullDownRefresh": true
           }
         }
       ]

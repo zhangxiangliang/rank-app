@@ -6,6 +6,7 @@ import Vuex, { StoreOptions } from 'vuex';
 import log, { LogState } from '@/store/log';
 import user, { UserState } from '@/store/user';
 import star, { StarState } from '@/store/star';
+import video, { VideoState } from '@/store/video';
 
 Vue.use(Vuex);
 
@@ -27,6 +28,7 @@ export interface RootStore {
   log: LogState;
   user: UserState;
   star: StarState;
+  video: VideoState;
 };
 
 export const RootStore: StoreOptions<RootStore> = {
@@ -34,6 +36,7 @@ export const RootStore: StoreOptions<RootStore> = {
     log,
     user,
     star,
+    video,
   },
 };
 

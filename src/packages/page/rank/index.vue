@@ -11,7 +11,7 @@
         v-for="item in stars"
         :key="item.id"
         class="cu-item"
-        @click="onAccountCopy(item)"
+        @click="onRankShow(item)"
       >
         <image class="cu-avatar round lg" :src="item.douyin_avatar"></image>
         <view class="content">
@@ -25,7 +25,7 @@
         </view>
 
         <view class="action" style="width: auto; margin-right: 10rpx">
-          <view class="cu-tag round bg-black light">复制</view>
+          <view class="cu-tag round bg-black light">查看</view>
         </view>
       </view>
     </view>
@@ -42,7 +42,7 @@ import { Star } from "@/store/star";
 
 // 帮助函数
 import { $toast } from "@/utils/message";
-import { PAGE_RANK_INDEX } from "@/config";
+import { PAGE_RANK_INDEX, PAGE_RANK_SHOW } from "@/config";
 
 @Component({})
 export default class UserIndex extends Vue {
@@ -67,6 +67,11 @@ export default class UserIndex extends Vue {
   // 下拉刷新
   onPullDownRefresh() {
     this.refresh();
+  }
+
+  // 抖音详情
+  onRankShow(item: Star) {
+    uni.navigateTo({ url: `${PAGE_RANK_SHOW}?id=${item.id}` });
   }
 
   // 复制抖音号

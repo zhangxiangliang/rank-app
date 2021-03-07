@@ -2,6 +2,9 @@
 import { Module } from 'vuex';
 import { RootStore, List, InitList } from '@/store';
 
+// 数据管理
+import { Video } from '@/store/video';
+
 // 帮助函数
 import { $toast } from '@/utils/message';
 import { Response, $get } from '@/utils/request';
@@ -21,6 +24,8 @@ export interface Star {
   douyin_liked: number;
   douyin_video: number;
   douyin_like: number;
+
+  videos: Video[];
 };
 
 export const InitStar: Star = {
@@ -35,6 +40,8 @@ export const InitStar: Star = {
   douyin_liked: 0,
   douyin_video: 0,
   douyin_like: 0,
+
+  videos: [],
 };
 
 export const star: Module<StarState, RootStore> = {
@@ -48,11 +55,17 @@ export const star: Module<StarState, RootStore> = {
   },
 
   getters: {
+    /**
+     * 获取抖音
+     */
+    getItem: (state) => (id: number) => {
+      return state.lists.find(item => item.id === Number(id)) || InitStar;
+    },
   },
 
   mutations: {
     /**
-     * 平台获取
+     * 抖音获取
      */
     fetch(state: StarState, payload: Response<Star[]>) {
       state.page = payload.meta.current_page;
@@ -62,10 +75,21 @@ export const star: Module<StarState, RootStore> = {
     },
 
     /**
-     * 平台加载
+     * 抖音加载
      */
     loading(state: StarState, payload: boolean) {
       state.loading = payload;
+    },
+
+    /**
+     * 详情
+     */
+    show(state: StarState, payload: Response<Star>) {
+      state.lists = state.lists.map(item => {
+        return item.id !== payload.data.id ? item : payload.data;
+      });
+
+      state.lists = state.lists.length === 0 ? [payload.data] : state.lists;
     },
   },
 
@@ -100,6 +124,15 @@ export const star: Module<StarState, RootStore> = {
         .then(res => commit('fetch', res))
         .catch(err => $toast(err.message))
         .finally(() => commit('loading', false));
+    },
+
+    /**
+     * 抖音详情
+     */
+    show({ commit }, { id }) {
+      return $get<Response<Star>>({ url: `/star/${id}`, data: {} })
+        .then(res => commit('show', res))
+        .catch(err => $toast(err.message));
     },
   },
 };
