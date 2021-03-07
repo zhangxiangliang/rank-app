@@ -133,7 +133,9 @@ export default class UserShow extends Vue {
   }
 
   // 下拉刷新
-  onPullDownRefresh() {}
+  onPullDownRefresh() {
+    this.onStarsChanged();
+  }
 
   // 视频播放
   onPlayVideo(item: Video) {
