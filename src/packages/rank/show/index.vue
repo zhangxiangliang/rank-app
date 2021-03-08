@@ -19,17 +19,48 @@
       </view>
     </view>
 
-    <view class="cu-card case no-card" v-for="item in videos" :key="item.id">
-      <view class="cu-item shadow padding-bottom">
-        <view class="image">
-          <image
-            :src="item.douyin_dynamic"
-            mode="widthFix"
-            @click="onPlayVideo(item)"
-          ></image>
+    <view class="flex flex-wrap">
+      <view class="basis-df">
+        <view
+          class="cu-card case no-card"
+          v-for="item in leftVideos"
+          :key="item.id"
+        >
+          <view class="cu-item shadow padding-bottom">
+            <view class="image">
+              <image
+                :src="item.douyin_dynamic"
+                mode="widthFix"
+                @click="onPlayVideo(item)"
+                lazy-load
+              ></image>
 
-          <view class="cu-bar bg-shadeBottom">
-            <text class="text-cut">{{ item.douyin_description }}</text>
+              <view class="cu-bar bg-shadeBottom">
+                <text class="text-cut">{{ item.douyin_description }}</text>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="basis-df">
+        <view
+          class="cu-card case no-card"
+          v-for="item in rightVideos"
+          :key="item.id"
+        >
+          <view class="cu-item shadow padding-bottom">
+            <view class="image">
+              <image
+                :src="item.douyin_dynamic"
+                mode="widthFix"
+                @click="onPlayVideo(item)"
+                lazy-load
+              ></image>
+
+              <view class="cu-bar bg-shadeBottom">
+                <text class="text-cut">{{ item.douyin_description }}</text>
+              </view>
+            </view>
           </view>
         </view>
       </view>
@@ -97,6 +128,8 @@ export default class RankShow extends Vue {
   };
 
   private videoContext: any = null;
+  private leftVideos: Video[] = [];
+  private rightVideos: Video[] = [];
   private video: Video = { ...InitVideo };
 
   // 页面加载
@@ -178,6 +211,12 @@ export default class RankShow extends Vue {
 
     // 获取视频列表
     this.refreshVideos({ star_id: this.state.id });
+  }
+
+  @Watch("videos")
+  private onVideosChanged() {
+    this.leftVideos = this.videos.filter((_, index) => index % 2 === 0);
+    this.rightVideos = this.videos.filter((_, index) => index % 2 === 1);
   }
 
   // 复制抖音号
