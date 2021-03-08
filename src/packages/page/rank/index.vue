@@ -45,7 +45,7 @@ import { $toast } from "@/utils/message";
 import { PAGE_RANK_INDEX, PAGE_RANK_SHOW } from "@/config";
 
 @Component({})
-export default class UserIndex extends Vue {
+export default class PageRank extends Vue {
   // 平台模型
   @State((state) => state.star.lists) private stars!: Star[];
   @State((state) => state.star.loading) private loading!: boolean;

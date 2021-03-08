@@ -31,7 +31,7 @@ import { $toast } from "@/utils/message";
 import { PAGE_LOG_INDEX } from "@/config";
 
 @Component({})
-export default class UserIndex extends Vue {
+export default class LogIndex extends Vue {
   // 平台模型
   @State((state) => state.log.lists) private logs!: Log[];
   @State((state) => state.log.loading) private loading!: boolean;

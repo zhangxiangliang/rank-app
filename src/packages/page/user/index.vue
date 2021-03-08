@@ -56,7 +56,7 @@ import {
 } from "@/config";
 
 @Component({})
-export default class UserIndex extends Vue {
+export default class PageUser extends Vue {
   public CONFIG_WAVE = CONFIG_WAVE;
   public CONFIG_QRCODE = CONFIG_QRCODE;
   public PAGE_LOG_INDEX = PAGE_LOG_INDEX;
